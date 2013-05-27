@@ -1,7 +1,8 @@
 <div class="container">
   <% if @tweets  %>
 
-  <p>Tweets of <span><%= @user.username %></span></p>
+  <h1>Tweets of <span><%= @user.username %></span></h1>
+  <p><%= @user.username %> has <%= @user.followers.count >= 200 ? "a lot of" : @user.followers.count %> followers</p>
   <ul>
     <li><img src="/ajax-load.gif" alt="Loading..."></li>
     <% @tweets.each do |tweet| %>

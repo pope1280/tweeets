@@ -21,3 +21,13 @@ post '/:username' do |username|
   content_type :json
   @new_tweets.to_json
 end
+
+get '/:username/followers' do |username|
+  @user = TwitterUser.find_by_username(username)
+  if !@user
+    @user = TwitterUser.create(username: username)
+  end
+  @tweets = @user.tweets.order('created_at DESC').limit(10)
+  @new_tweets = nil
+  erb :index
+end
