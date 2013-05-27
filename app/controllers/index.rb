@@ -3,7 +3,7 @@ get '/' do
 end
 
 get '/:username' do |username|
-  @user = TwitterUser.find_by_username(params[:username])
+  @user = TwitterUser.find_by_username(username)
   if !@user
     @user = TwitterUser.create(username: username)
   end
@@ -11,7 +11,7 @@ get '/:username' do |username|
     @user.fetch_tweets!
   end
 
-  @tweets = @user.tweets.limit(10)
+  @tweets = @user.tweets.order('created_at DESC').limit(10)
 
   erb :index
 end

@@ -8,12 +8,17 @@ class TwitterUser < ActiveRecord::Base
     end
   end
 
+  def last_tweet
+    tweets = Twitter.user_timeline(self.username, {count: 1})
+    tweets.first[:text]
+  end
+
   def tweets_stale?
     time = DateTime.now
     if self.tweets.empty?
       return true
     else
-      self.tweets.order('created_at').last.created_at - time < (-900)
+      self.tweets.order('created_at DESC').last.tweet != last_tweet
     end
   end
 end
