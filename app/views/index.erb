@@ -1,10 +1,12 @@
 <div class="container">
   <% if @tweets  %>
 
-  <p>Tweets of <%= @user.username %></p>
-
-  <% @tweets.each do |tweet| %>
-  <p><%= tweet.tweet %></p>
-  <% end %>
+  <p>Tweets of <span><%= @user.username %></span></p>
+  <ul>
+    <li><img src="/ajax-load.gif" alt="Loading..."></li>
+    <% @tweets.each do |tweet| %>
+    <li><%= tweet.tweet %></li>
+    <% end %>
+  </ul>
   <% end %>
 </div>

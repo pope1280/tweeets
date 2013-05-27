@@ -3,9 +3,12 @@ class TwitterUser < ActiveRecord::Base
 
   def fetch_tweets!
     tweets = Twitter.user_timeline(self.username)
+    new_tweets = []
     tweets.each do |tweet|
-      Tweet.create(tweet: tweet[:text], twitter_user_id: self.id)
+      exist = Tweet.find_by_tweet(tweet[:text])
+      new_tweets << Tweet.create(tweet: tweet[:text], twitter_user_id: self.id) if !exist
     end
+    new_tweets
   end
 
   def last_tweet
