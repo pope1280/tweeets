@@ -1,10 +1,10 @@
 <div class="container">
   <% if @tweets  %>
 
-  <p>Tweets of <%= @tweets.first[:user][:name] %></p>
+  <p>Tweets of <%= @user.username %></p>
 
   <% @tweets.each do |tweet| %>
-  <p><%= tweet[:text] %></p>
+  <p><%= tweet.tweet %></p>
   <% end %>
   <% end %>
 </div>
