@@ -1,0 +1,10 @@
+<div class="container">
+  <% if @tweets  %>
+
+  <p>Tweets of <%= @tweets.first[:user][:name] %></p>
+
+  <% @tweets.each do |tweet| %>
+  <p><%= tweet[:text] %></p>
+  <% end %>
+  <% end %>
+</div>
